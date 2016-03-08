@@ -1213,7 +1213,9 @@ static QINLINE qt_threadqueue_node_t *qthread_steal(qthread_shepherd_t *thief_sh
 #endif
         }
         attempts = attempts < ULONG_MAX ? attempts + 1 : ULONG_MAX;
-        for(unsigned long i=0; i < (1 << attempts) % max_backoff; i++){
+        unsigned long wait = 1 << attempts;
+        wait = wait < max_backoff ? wait : max_backoff;
+        for(unsigned long i=0; i < wait; i++){
           SPINLOCK_BODY();
         }
     }
