@@ -14,11 +14,9 @@ TESTS = \
 		qthread_cas \
 		qthread_cacheline \
 		qthread_readstate \
-		qthread_id \
 		qthread_incr qthread_fincr qthread_dincr \
 		qthread_stackleft \
 		qthread_migrate_to \
-		qthread_disable_shepherd \
 		qtimer \
 		queue \
 		qthread_fork_precond \
