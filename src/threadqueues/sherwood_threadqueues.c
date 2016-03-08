@@ -54,7 +54,8 @@ static aligned_t steal_disable   = 0;
 static long      steal_chunksize = 0;
 // Ratio for amount to steal, denominator. e.g. steal_ratio = 2 means half of a
 // queue is stolen. Default is 2
-static long      steal_ratio = 2;
+static unsigned long steal_ratio = 2;
+static unsigned long max_backoff = 32; // Initial heuristc guess at default
 
 #ifdef STEAL_PROFILE
 # define STEAL_CALLED(shep)     qthread_incr( & ((shep)->steal_called), 1)
@@ -181,6 +182,7 @@ void INTERNAL qt_threadqueue_subsystem_init(void)
     steal_chunksize = qt_internal_get_env_num("STEAL_CHUNK", 0, 0);
     // Determines how 
     steal_ratio = qt_internal_get_env_num("STEAL_RATIO", 2, 0);
+    max_backoff = qt_internal_get_env_num("MAX_BACKOFF", 32, 0);
     qthread_internal_cleanup(qt_threadqueue_subsystem_shutdown);
 }
 
@@ -1163,6 +1165,7 @@ static QINLINE qt_threadqueue_node_t *qthread_steal(qthread_shepherd_t *thief_sh
     qthread_shepherd_t *const    shepherds       = qlib->shepherds;
     qthread_shepherd_id_t *const sorted_sheplist = thief_shepherd->sorted_sheplist;
     assert(sorted_sheplist);
+    unsigned long attempts = 0;
 
     qt_threadqueue_t *myqueue = thief_shepherd->ready;
 
@@ -1209,7 +1212,10 @@ static QINLINE qt_threadqueue_node_t *qthread_steal(qthread_shepherd_t *thief_sh
             sched_yield();
 #endif
         }
-        SPINLOCK_BODY();
+        attempts = attempts < ULONG_MAX ? attempts + 1 : ULONG_MAX;
+        for(unsigned long i=0; i < 1 << (attempts % max_backoff); i++){
+          SPINLOCK_BODY();
+        }
     }
     thief_shepherd->stealing = 0;
     return stolen;
