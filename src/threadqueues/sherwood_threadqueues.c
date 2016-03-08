@@ -1165,7 +1165,7 @@ static QINLINE qt_threadqueue_node_t *qthread_steal(qthread_shepherd_t *thief_sh
     qthread_shepherd_t *const    shepherds       = qlib->shepherds;
     qthread_shepherd_id_t *const sorted_sheplist = thief_shepherd->sorted_sheplist;
     assert(sorted_sheplist);
-    unsigned long attempts = 0;
+    unsigned long backoff = 1;
 
     qt_threadqueue_t *myqueue = thief_shepherd->ready;
 
@@ -1212,10 +1212,8 @@ static QINLINE qt_threadqueue_node_t *qthread_steal(qthread_shepherd_t *thief_sh
             sched_yield();
 #endif
         }
-        attempts = attempts < ULONG_MAX ? attempts + 1 : ULONG_MAX;
-        unsigned long wait = 1 << attempts;
-        wait = wait < max_backoff ? wait : max_backoff;
-        for(unsigned long i=0; i < wait; i++){
+        backoff = backoff * 2 < max_backoff ? backoff * 2 : max_backoff;
+        for(unsigned long i=0; i < backoff; i++){
           SPINLOCK_BODY();
         }
     }
