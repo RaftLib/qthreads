@@ -23,3 +23,15 @@ cscope.out
 *.lo
 .libs
 .dirstamp
+GPATH
+GRTAGS
+GTAGS
+*.trs
+*.log
+*~
+activate.sh
+*.trs
+*.log
+*.test
+*.tar.bz2
+*.tar.gz
