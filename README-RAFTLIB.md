@@ -3,6 +3,7 @@
 ```bash
 ./autogen.sh && ./configure && make clean && make -j$(nproc) && make -j1 check && sudo make install
 ```
+* you might need to run ```ldconfig``` before the shared lib is findable 
 * Once complete, and make check is successful, go back to building/linking RaftLib
 * Pass -DUSEQTHREAD=1 to cmake
 
