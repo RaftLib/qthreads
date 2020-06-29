@@ -25,7 +25,7 @@ int main(int   argc,
     NUMARG(count, "MT_COUNT");
     assert(0 != count);
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
 
     for (uint64_t i = 0; i < count; i++) {
 	qthread_fork_precond_simple(null_task, NULL, NULL, 0, NULL);

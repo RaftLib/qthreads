@@ -67,7 +67,7 @@ int main(int   argc,
 {
     size_t depth = 3;
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
 
     CHECK_VERBOSE();
     NUMARG(depth, "TEST_DEPTH");

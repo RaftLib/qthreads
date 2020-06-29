@@ -53,7 +53,7 @@ int main(int argc,
 {
     long int i;
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
 
     NUMARG(target, "TEST_TARGET");
     CHECK_VERBOSE();

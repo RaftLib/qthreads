@@ -30,7 +30,7 @@ static void passTokens(size_t start, size_t stop, void* arg) {
 }
 
 static void init() {
-  assert(qthread_initialize() == 0);
+  const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
   printf("%i threads...\n", qthread_num_workers());
 
   // init array of syncvars (code grabbed from stress/feb_stream.c)

@@ -32,7 +32,7 @@ aligned_t fib(void *args_){
 }
 
 int main(){
-  assert(qthread_initialize() == 0);
+  const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
   qt_sinc_t sinc;
   qt_sinc_init(&sinc, 0, NULL, NULL, 1);
   int ret;

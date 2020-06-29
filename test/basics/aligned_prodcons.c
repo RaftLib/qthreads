@@ -50,7 +50,7 @@ int main(int argc,
     aligned_t t;
     int ret;
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
 
     x = 0;
     CHECK_VERBOSE();

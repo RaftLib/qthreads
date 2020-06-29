@@ -56,7 +56,7 @@ int main(int   argc,
     NUMARG(count, "MT_COUNT");
     assert(0 != count);
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
 
     timer = qtimer_create();
 

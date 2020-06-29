@@ -209,7 +209,7 @@ int main(int argc, char *argv[])
 
     iprintf("=== Test Subteams ===\n");
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
 
     timer = qtimer_create();
 

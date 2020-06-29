@@ -1182,7 +1182,7 @@ int main(int argc, char *argv[])
     assert(nrows/prows > 1 && ncols/pcols > 1);
 
     // Initialize Qthreads
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
 
     qtimer_t setup_timer = qtimer_create();
     qtimer_t exec_timer = qtimer_create();

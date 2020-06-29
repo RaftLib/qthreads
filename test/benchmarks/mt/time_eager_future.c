@@ -36,7 +36,7 @@ int main(int   argc,
     NUMARG(par_fork, "MT_PAR_FORK");
     assert(0 != count);
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
 
     syncvar_t *rets = NULL;
     for (uint64_t i = 0; i < count; i++) rets[i] = SYNCVAR_EMPTY_INITIALIZER;

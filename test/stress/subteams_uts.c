@@ -291,7 +291,7 @@ int main(int   argc,
     DBLARG(subteam_prob, "UTS_SUBTEAM_PROB");
     NUMARG(root_context, "UTS_ROOT_CONTEXT");
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
 
 #ifdef PRINT_STATS
     print_stats();
