@@ -52,7 +52,7 @@ int main(int   argc,
     // TODO(npe) how does qthreads handle signals?
     sigaction(SIGBUS, &sa, NULL);
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
 
     CHECK_VERBOSE();
     NUMARG(threads, "THREADS");

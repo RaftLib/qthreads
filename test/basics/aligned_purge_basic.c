@@ -71,7 +71,7 @@ int main(int argc,
          char *argv[])
 {
     CHECK_VERBOSE();
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
     iprintf("%i shepherds...\n", qthread_num_shepherds());
     iprintf("  %i threads total\n", qthread_num_workers());
 

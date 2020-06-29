@@ -35,7 +35,7 @@ int main(int   argc,
     double       max_time   = 0.0;
     double       min_time   = DBL_MAX;
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
     t = qtimer_create();
 
     CHECK_VERBOSE();

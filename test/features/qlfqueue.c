@@ -53,7 +53,7 @@ int main(int argc,
     qlfqueue_t *q;
     size_t i;
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
     NUMARG(threadcount, "THREAD_COUNT");
     NUMARG(elementcount, "ELEMENT_COUNT");
     CHECK_VERBOSE();

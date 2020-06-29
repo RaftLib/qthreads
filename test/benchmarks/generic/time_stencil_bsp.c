@@ -140,7 +140,7 @@ int main(int argc, char *argv[])
     assert (n > 0 && m > 0);
 
     // Initialize Qthreads
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
 
     qtimer_t alloc_timer = qtimer_create();
     qtimer_t init_timer = qtimer_create();

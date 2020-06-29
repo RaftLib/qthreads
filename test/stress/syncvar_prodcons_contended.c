@@ -63,7 +63,7 @@ int main(int argc,
 
     uint64_t pairs;
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
     pairs = qthread_num_shepherds() * 6;
 
     CHECK_VERBOSE();

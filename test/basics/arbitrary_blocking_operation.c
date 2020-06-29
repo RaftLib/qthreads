@@ -41,7 +41,7 @@ int main(int argc,
     assert(foo == 1);
     foo = 0;
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
     initialized = 1;
 
     assert(qthread_shep() != NO_SHEPHERD);

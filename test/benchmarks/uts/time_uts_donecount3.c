@@ -339,7 +339,7 @@ int main(int   argc,
         setenv("QT_STACK_SIZE", "32768", 0);
     }
 
-    assert(qthread_initialize() == 0);
+    const int ret_cond_var = qthread_initialize();  assert( ret_cond_var == QTHREAD_SUCCESS ); (void) ret_cond_var; 
 
 #ifdef PRINT_STATS
     print_stats();
