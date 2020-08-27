@@ -1,7 +1,7 @@
 ## Compilation Instructions
 * Once you've downloaded qthreads, for Linux use:
 ```bash
-automake --add-missing && ./configure --disable-internal-spinlock && make clean && make -j$(nproc) && make -j check && sudo make install
+libtoolize && aclocal && autoconf && autoheader && automake --add-missing && ./configure --disable-internal-spinlock && make clean && make -j$(nproc) && make -j check && sudo make install
 ```
 * you might need to run ```ldconfig``` before the shared lib is findable 
 * Once complete, and make check is successful, go back to building/linking RaftLib
